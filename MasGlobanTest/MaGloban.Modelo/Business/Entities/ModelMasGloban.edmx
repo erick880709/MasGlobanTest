@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_MASGLOBANModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPLOYEES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IDENTIFICACION" Type="int" />
+          <Property Name="NOMBRE" Type="nchar" MaxLength="50" />
+          <Property Name="APELLIDO" Type="nchar" MaxLength="50" />
+          <Property Name="TIPOCONTRATO" Type="int" />
+          <Property Name="CELULAR" Type="int" />
+          <Property Name="SALARY" Type="float" />
+        </EntityType>
+        <EntityType Name="TIPOCONTRATO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TIPOCONTRATO" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="SP_CONSULT_EMPLOYEES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CEDULA" Type="int" Mode="In" />
+          <Parameter Name="INDICADOR" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TYPE_CONTRACT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_MASGLOBANModelStoreContainer">
+          <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOCONTRATO" EntityType="Self.TIPOCONTRATO" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_MASGLOBANModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EMPLOYEES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IDENTIFICACION" Type="Int32" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="TIPOCONTRATO" Type="Int32" />
+          <Property Name="CELULAR" Type="Int32" />
+          <Property Name="SALARY" Type="Double" />
+        </EntityType>
+        <EntityType Name="TIPOCONTRATO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TIPOCONTRATO1" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DB_MASGLOBANEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" />
+          <EntitySet Name="TIPOCONTRATO" EntityType="Self.TIPOCONTRATO" />
+          <FunctionImport Name="SP_CONSULT_EMPLOYEES" ReturnType="Collection(DB_MASGLOBANModel.SP_CONSULT_EMPLOYEES_Result)">
+            <Parameter Name="CEDULA" Mode="In" Type="Int32" />
+            <Parameter Name="INDICADOR" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TYPE_CONTRACT" ReturnType="Collection(DB_MASGLOBANModel.SP_TYPE_CONTRACT_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SP_CONSULT_EMPLOYEES_Result">
+          <Property Type="Decimal" Name="IDENTIFICACION" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="CELULAR" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="TIPOCONTRATO" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="SALARY_CONTRACT" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="SP_TYPE_CONTRACT_Result">
+          <Property Type="String" Name="TIPOCONTRATO" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_MASGLOBANModelStoreContainer" CdmEntityContainer="DB_MASGLOBANEntities1">
+          <EntitySetMapping Name="EMPLOYEES">
+            <EntityTypeMapping TypeName="DB_MASGLOBANModel.EMPLOYEES">
+              <MappingFragment StoreEntitySet="EMPLOYEES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDENTIFICACION" ColumnName="IDENTIFICACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="TIPOCONTRATO" ColumnName="TIPOCONTRATO" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="SALARY" ColumnName="SALARY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOCONTRATO">
+            <EntityTypeMapping TypeName="DB_MASGLOBANModel.TIPOCONTRATO">
+              <MappingFragment StoreEntitySet="TIPOCONTRATO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TIPOCONTRATO1" ColumnName="TIPOCONTRATO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CONSULT_EMPLOYEES" FunctionName="DB_MASGLOBANModel.Store.SP_CONSULT_EMPLOYEES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_MASGLOBANModel.SP_CONSULT_EMPLOYEES_Result">
+                <ScalarProperty Name="IDENTIFICACION" ColumnName="IDENTIFICACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="TIPOCONTRATO" ColumnName="TIPOCONTRATO" />
+                <ScalarProperty Name="SALARY_CONTRACT" ColumnName="SALARY_CONTRACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TYPE_CONTRACT" FunctionName="DB_MASGLOBANModel.Store.SP_TYPE_CONTRACT" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_MASGLOBANModel.SP_TYPE_CONTRACT_Result">
+                <ScalarProperty Name="TIPOCONTRATO" ColumnName="TIPOCONTRATO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
